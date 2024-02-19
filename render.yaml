@@ -3,7 +3,7 @@ databases:
     ipAllowList: []
     databaseName: contact_manager_system
     user: james
-    service: free
+    plan: free
 
 services:
   - type: web

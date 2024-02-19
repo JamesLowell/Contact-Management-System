@@ -20,10 +20,10 @@
     </div>
     <div class="flex justify-between">
       <div class="w-full">
-        <% @contacts.each do |contact| %>
-          <%= link_to edit_contact_path(contact) do %>
+        
+          <%= link_to edit_contact_path(@contact) do %>
             <button type="button" class="text-center text-indigo-50 font-bold w-full hover:bg-indigo-100 hover:text-indigo-400 bg-indigo-500 cursor-pointer p-4 border">Edit</button>
-          <% end %>
+          
         <% end %>
       </div>
         <%= link_to "Destroy", contact_path(@contact), method: :delete, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "w-full text-center text-indigo-50 font-bold w-full hover:bg-indigo-100 hover:text-indigo-400 bg-indigo-500 cursor-pointer p-4 border", remote: true %>    

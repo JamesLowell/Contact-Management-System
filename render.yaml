@@ -1,23 +1,19 @@
 databases:
-  - name: contact_manager
-    databaseName: contact_manager_production
-    user: contact_manager
-    plan: free
+  - name: postgres
+    ipAllowList: []
+    databaseName: contact_manager_system
+    user: james
 
 services:
   - type: web
-    name: contact_manager
-    runtime: ruby
-    plan: free
-    buildCommand: "./bin/render-build.sh"
-    # preDeployCommand: "bundle exec rails db:migrate" # preDeployCommand only available on paid instance types
-    startCommand: "bundle exec rails server"
+    name: contact_management_system
+    env: ruby
+    buildCommand: "./render-build.sh"
+    startCommand: "bundle exec rails s"
     envVars:
-      - key: N7hSFkgcpvFgS2BFBZk88GsC+GPQ77xWKohDz5TW/dSxZNZg1x2nkgeq/EFwqb7wk69wndiCuwjMRVrpoNHQhyItQquwKeHR5u4u11UzW+Yg2EM2AmPx+HABKReO6c52aZKmAgSw7LJWpIE3841ckk/yUWEikpK5gkWvQxIVv8kyviFwPwdExGp5gQni3rD6Ud2dc9S7YjISQsh4YbCBtp852kBhnBzDlzGTBe4jMiG+OGdy+bBqJUtW92DM73EB7kvnaNFFeiXdBLhlJR3MmupFpVvumXd9DiLQOJFgG5UgJsi6KHpvVgCHXpnfwqRqw0Za1N5V//bc1gUMxT6Lc4wzTfrMtcwgBVWoZAKZZ3hq6F56oYUpCI9f6ibkBxUO+n6tPlQDMnqkbV/wCJ8myf6eCUIX--HnbYl010WOm0V/vu--rPSN3Y56wr0XswXyFy7vPA==
+      - key: DATABASE_URL
         fromDatabase:
-          name: contact_manager
+          name: postgres
           property: connectionString
       - key: RAILS_MASTER_KEY
         sync: false
-      - key: WEB_CONCURRENCY
-        value: 2 # sensible default

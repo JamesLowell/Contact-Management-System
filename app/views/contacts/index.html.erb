@@ -1,26 +1,71 @@
-<!-- app/views/contacts/index.html.erb -->
-<h1>All Contacts</h1>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Phone</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @contacts.each do |contact| %>
-      <tr>
-        <td><%= contact.name %></td>
-        <td><%= contact.email %></td>
-        <td><%= contact.phone %></td>
-        <td>
-          <%= link_to 'Edit', edit_contact_path(contact) %>
-          <%= link_to 'Delete', contact, method: :delete, data: { confirm: 'Are you sure?' } %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<%= link_to 'New Contact', new_contact_path %>
+<div class="flex flex-col relative">
+  <div>
+    <nav class="bg-indigo-50 p-5 w-full top-0 z-10">
+      <div class="">
+        <div class="flex flex-col h-auto gap-6 mb-3">
+          <div class="text-indigo-950 text-3xl font-bold">Contact Management</div>
+          <div class="flex items-center justify-between">
+            <div>
+              <a href="<%= new_contact_path %>" class="bg-indigo-700 hover:bg-indigo-500 text-indigo-50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                <svg class="h-5 w-5 text-indigo-50 mr-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" />
+                  <circle cx="12" cy="12" r="9" />
+                  <line x1="9" y1="12" x2="15" y2="12" />
+                  <line x1="12" y1="9" x2="12" y2="15" />
+                </svg>
+                Add
+              </a>
+            </div>
+
+            <div class="flex items-center w-4/12 justify-end gap-5">
+              <div class="relative hidden md:block w-80">
+                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none ">
+                  <svg class="w-4 h-4 text-indigo-950" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                  </svg>
+                  <span class="sr-only">Search icon</span>
+                </div>
+                <input type="text" id="search-navbar" class="block w-full p-3 ps-10 text-sm text-indigo-900 border border-white-300 rounded-lg bg-white-50 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Search...">
+              </div>
+
+              <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-indigo-950 bg-transparent font-medium text-sm px-5 py-2.5 text-center inline-flex items-center bg-transparent hover:border-indigo-500 border-b-2 border-indigo-950" type="button">
+                Sort by 
+                <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                </svg>
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <div class="overflow-y-auto h-lvh">
+    <table class="bg-indigo-50 w-full border-collapse text-left">
+      <thead class=" border-b-4 border-indigo-950 uppercase text-indigo-950 text-s">
+        <tr>
+          <th class="p-3 text-left  border-b border-indigo-950">Name</th>
+          <th class="p-3 text-left  border-b border-indigo-950">Email</th>
+          <th class="p-3 text-left border-b border-indigo-950">Phone</th>
+          <th class="p-3 text-left  border-b border-indigo-950">Detail</th>
+        </tr>
+      </thead>
+      <tbody class="">
+        <% @contacts.each do |contact| %>
+          <tr class="hover:bg-indigo-100">
+            <td class="p-3 border-b border-indigo-950"><%= contact.name %></td>
+            <td class="p-3 border-b border-indigo-950"><%= contact.email %></td>
+            <td class="p-3 border-b border-indigo-950"><%= contact.phone %></td>
+            <td class="p-3 border-b border-indigo-950">
+              <%= link_to contact, class: "bg-indigo-700 hover:bg-indigo-500 text-indigo-50 font-medium rounded-lg text-sm px-2 py-2 text-center inline-flex items-center" do %>
+                Details
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

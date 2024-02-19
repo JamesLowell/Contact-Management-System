@@ -1,9 +1,8 @@
-<!-- app/views/contacts/_form.html.erb -->
 <%= form_with(model: contact, local: true) do |form| %>
   <% if contact.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
-      <ul>
+      <h2 class="text-red-600"><%= pluralize(contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
+      <ul class="list-disc text-red-600">
         <% contact.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
@@ -11,22 +10,33 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="p-6">
+    <div class="mb-4">
+      <%= form.label :name, class: "block text-indigo-950 font-bold mb-2" %>
+      <%= form.text_field :name, class: "form-input mt-1 block w-full border border-indigo-500 p-1", maxlength: 50, required: true %>
+    </div>
+
+    <div class="mb-4">
+      <%= form.label :email, class: "block text-indigo-950 font-bold mb-2" %>
+      <%= form.email_field :email, class: "form-input mt-1 block w-full border border-indigo-500 p-1", required: true %>
+    </div>
+
+    <div class="mb-4">
+      <%= form.label :phone, class: "block text-indigo-950 font-bold mb-2" %>
+      <%= form.text_field :phone, class: "form-input mt-1 block w-full border border-indigo-500 p-1", pattern: "[0-9]{11}", title: "Please enter 11 digits", required: true %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.email_field :email %>
-  </div>
+  <div class="flex justify-between">
+    <div class="w-full">
+        <%= link_to contacts_path do %>
+            <button type="button" class="text-center text-indigo-50 font-bold w-full hover:bg-indigo-100 hover:text-indigo-400 bg-indigo-500 cursor-pointer p-4 border">Back</button>
+        <% end %>
+    </div>
+    <div class="w-full">
+        <button type="submit" class="text-center text-indigo-50 font-bold w-full hover:bg-indigo-100 hover:text-indigo-400 bg-indigo-500 cursor-pointer p-4 border">Submit</button>
+    </div>
+</div>
 
-  <div class="field">
-    <%= form.label :phone %>
-    <%= form.text_field :phone %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
   </div>
 <% end %>

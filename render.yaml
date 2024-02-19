@@ -1,0 +1,23 @@
+databases:
+  - name: contact_manager
+    databaseName: contact_manager_production
+    user: contact_manager
+    plan: free
+
+services:
+  - type: web
+    name: contact_manager
+    runtime: ruby
+    plan: free
+    buildCommand: "./bin/render-build.sh"
+    # preDeployCommand: "bundle exec rails db:migrate" # preDeployCommand only available on paid instance types
+    startCommand: "bundle exec rails server"
+    envVars:
+      - key: DATABASE_URL=postgres://localhost/rails_event_store_active_record?pool=5
+        fromDatabase:
+          name: contact_manager
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
+      - key: WEB_CONCURRENCY
+        value: 2 # sensible default
